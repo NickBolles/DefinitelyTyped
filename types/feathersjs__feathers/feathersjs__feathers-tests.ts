@@ -4,7 +4,7 @@ version.toLowerCase();
 SKIP.toString();
 ACTIVATE_HOOKS.toString();
 const fn = () => { };
-activateHooks(true)(fn)(fn);
+activateHooks(true)(fn);
 
 interface User {
     id: number;
@@ -26,8 +26,9 @@ const hook: Hook<Data> = (context) => {
     context.result = { test: 'true' };
 };
 
-const app = feathers() as Application<Services>;
+const app = feathers();
 
+// Test the service un-typed
 app.service('users').get(0).then(user => {
     user.id = 123;
     user.name = "foo";

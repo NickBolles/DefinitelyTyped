@@ -13,18 +13,17 @@
 import { EventEmitter } from 'events';
 import * as self from '@feathersjs/feathers';
 
-declare const feathers: (<T>() => Application<T>) & typeof self
+// tslint:disable-next-line no-unnecessary-generics
+declare const feathers: (<T>() => Application<T>) & typeof self;
 export default feathers;
 
 export const version: string;
 export const SKIP: SkipSymbol;
 export const ACTIVATE_HOOKS: ActivateHooksSymbol;
-export const activateHooks: (args: any) => (hook: Function) => Function;
-
+export function activateHooks(args: any): (hook: Hook) => Hook;
 
 export type SkipSymbol = symbol | '__feathersSkipHooks';
 export type ActivateHooksSymbol = symbol | '__feathersActivateHooks';
-
 
 export type Id = number | string;
 export type NullableId = Id | null;
@@ -55,9 +54,9 @@ export interface Paginated<T> {
     data: T[];
 }
 
+// tslint:disable-next-line void-return
 export type HookResult<T = any> = HookContext<T> | SkipSymbol | void;
 
-// tslint:disable-next-line void-return
 export type Hook<T = any> = (hook: HookContext<T>) => Promise<HookResult<T>> | HookResult<T>;
 
 export interface HookContext<T = any> {
