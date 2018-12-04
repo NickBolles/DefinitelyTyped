@@ -3,6 +3,7 @@
 // Definitions by:  Jan Lohage <https://github.com/j2L4e>
 //                  Abraao Alves <https://github.com/AbraaoAlves>
 //                  Tim Mensch <https://github.com/TimMensch>
+//                  Nick Bolles <https://github.com/NickBolles>
 // Definitions: https://github.com/feathersjs-ecosystem/feathers-typescript
 
 // TypeScript Version: 2.3
@@ -12,12 +13,7 @@
 import { EventEmitter } from 'events';
 import * as self from '@feathersjs/feathers';
 
-type FeathersCreateApp<T = object> = (() => Application<T>) | typeof self;
-
-
-declare const feathers: typeof self & {
-    <T>(): Application<T>;
-}
+declare const feathers: (<T>() => Application<T>) & typeof self
 export default feathers;
 
 export const version: string;
